@@ -3,19 +3,28 @@
   margin: 0;
   padding: 0;
 }
+/* body {
+} */
 .container {
   background-color: aqua;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: 1620px;
-  height: 1620px;
+  /* gap: 1px; */
+  width: 960px;
+  height: 960px;
   margin: auto;
-  padding: 2px;
+  /* padding: 2px; */
 }
-.container div {
-  background-color: blue;
-  width: 100px;
-  height: 100px;
-  flex: 0 0 100px;
+.gridCell {
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+  transition: background-color 450ms ease-out;
+}
+.container div:hover {
+  /* background-color: red; */
+}
+.drawn {
+  background-color: black;
 }
