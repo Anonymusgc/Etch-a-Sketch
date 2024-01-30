@@ -20,15 +20,38 @@ const createGrid = function (newSize = 16) {
     div.style.height = cellHeight + "px";
     // container.appendChild(div);
     cellArray.push(div);
-    console.log("Work");
+    // console.log("Work");
   }
-  console.log(cellArray);
+  // console.log(cellArray);
   container.replaceChildren(...cellArray);
 };
 
-// function for changing background color by adding class
+// function for changing background color
 const draw = function (event) {
-  event.target.classList.add("drawn");
+  const colorRGBA = window.getComputedStyle(event.target).backgroundColor;
+  // regex to match content inside brackets
+  const color = colorRGBA
+    .match(/\([^)]+\)/)
+    .toString()
+    .slice(1, -1);
+  let colorArray = color.split(",");
+  colorArray = colorArray.map((item) => {
+    item = Number(item);
+    return item;
+  });
+  console.log(colorArray);
+
+  let alpha = Number(colorArray[3]) || 1;
+  if (colorArray[0] == 255 && colorArray[1] == 255 && colorArray[2] == 255) {
+    alpha = 0.1;
+  } else if (alpha != 1) {
+    alpha += 0.1;
+  }
+
+  console.log(alpha);
+
+  event.target.style.backgroundColor = `rgba(0,0,0,${alpha})`;
+  // event.target.classList.add("drawn");
 };
 
 // adding draw to each cell on hover
