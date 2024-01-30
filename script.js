@@ -26,31 +26,42 @@ const createGrid = function (newSize = 16) {
   container.replaceChildren(...cellArray);
 };
 
+const getRandom = function (min, max) {
+  const randNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  return randNumber;
+};
+
 // function for changing background color
 const draw = function (event) {
   const colorRGBA = window.getComputedStyle(event.target).backgroundColor;
+
   // regex to match content inside brackets
   const color = colorRGBA
     .match(/\([^)]+\)/)
     .toString()
     .slice(1, -1);
+
   let colorArray = color.split(",");
   colorArray = colorArray.map((item) => {
     item = Number(item);
     return item;
   });
-  console.log(colorArray);
+  // console.log(colorArray);
 
   let alpha = Number(colorArray[3]) || 1;
   if (colorArray[0] == 255 && colorArray[1] == 255 && colorArray[2] == 255) {
     alpha = 0.1;
+    colorArray[0] = getRandom(0, 255);
+    colorArray[1] = getRandom(0, 255);
+    colorArray[2] = getRandom(0, 255);
   } else if (alpha != 1) {
     alpha += 0.1;
   }
 
-  console.log(alpha);
+  // console.log(colorArray);
+  // console.log(alpha);
 
-  event.target.style.backgroundColor = `rgba(0,0,0,${alpha})`;
+  event.target.style.backgroundColor = `rgba(${colorArray[0]},${colorArray[1]},${colorArray[2]},${alpha})`;
   // event.target.classList.add("drawn");
 };
 
