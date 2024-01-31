@@ -1,5 +1,7 @@
 "use strict";
 
+let penType = "";
+
 const createGrid = function (newSize = 16) {
   const container = document.querySelector(".container");
   const cellArray = [];
@@ -51,9 +53,9 @@ const draw = function (event) {
   let alpha = Number(colorArray[3]) || 1;
   if (colorArray[0] == 255 && colorArray[1] == 255 && colorArray[2] == 255) {
     alpha = 0.1;
-    colorArray[0] = getRandom(0, 255);
-    colorArray[1] = getRandom(0, 255);
-    colorArray[2] = getRandom(0, 255);
+    colorArray[0] = penType == "black" ? 0 : getRandom(0, 255);
+    colorArray[1] = penType == "black" ? 0 : getRandom(0, 255);
+    colorArray[2] = penType == "black" ? 0 : getRandom(0, 255);
   } else if (alpha != 1) {
     alpha += 0.1;
   }
@@ -88,5 +90,13 @@ const changeGrid = function () {
 const changeGridBtn = document.querySelector(".change-grid");
 changeGridBtn.addEventListener("click", changeGrid);
 
+const radioPen = document.querySelectorAll("input[type=radio]");
+radioPen.forEach((item) => {
+  item.addEventListener("change", () => {
+    penType = radioPen[0].checked ? "black" : "color";
+  });
+});
+
+penType = radioPen[0].checked ? "black" : "color";
 createGrid();
 addDraw();
