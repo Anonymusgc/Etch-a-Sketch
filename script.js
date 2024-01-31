@@ -79,7 +79,8 @@ const changeGrid = function () {
   const newSize = Number(
     prompt("Input number of squares per side for new grid ( max 100 squares )")
   );
-  if (newSize < 1 || newSize > 100) {
+
+  if (newSize < 1 || newSize > 100 || isNaN(newSize)) {
     alert("Input out of range, please select again");
     return changeGrid();
   }
