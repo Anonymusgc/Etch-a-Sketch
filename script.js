@@ -8,11 +8,11 @@ const createGrid = function (newSize = 16) {
 
   const width = container.offsetWidth;
   const height = container.offsetHeight;
-  let cellWidth = width / newSize;
-  let cellHeight = height / newSize;
-  // console.log(cellHeight);
-  // console.log(cellWidth);
-  // console.log(newSize * newSize);
+  let cellWidth = Math.floor((width / newSize) * 10) / 10;
+  let cellHeight = Math.round((height / newSize) * 10) / 10;
+  console.log(cellHeight);
+  console.log(cellWidth);
+  console.log(newSize * newSize);
 
   for (let i = 0; i < newSize * newSize; i++) {
     const div = document.createElement("div");
@@ -51,14 +51,15 @@ const draw = function (event) {
   // console.log(colorArray);
 
   let alpha = Number(colorArray[3]) || 1;
+
   if (colorArray[0] == 255 && colorArray[1] == 255 && colorArray[2] == 255) {
     alpha = 0.1;
-    colorArray[0] = penType == "black" ? 0 : getRandom(0, 255);
-    colorArray[1] = penType == "black" ? 0 : getRandom(0, 255);
-    colorArray[2] = penType == "black" ? 0 : getRandom(0, 255);
   } else if (alpha != 1) {
     alpha += 0.1;
   }
+  colorArray[0] = penType == "black" ? 0 : getRandom(0, 255);
+  colorArray[1] = penType == "black" ? 0 : getRandom(0, 255);
+  colorArray[2] = penType == "black" ? 0 : getRandom(0, 255);
 
   // console.log(colorArray);
   // console.log(alpha);
